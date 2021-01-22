@@ -3,32 +3,36 @@ import styles from './users.module.css'
 import * as axios from "axios";
 import userPhoto from '../../image/user-male.png'
 
-let Users = (props) => {
-    if (props.userData.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => (
-            props.setUsers(response.data.items)
-        ));
-    }
-    return <div>
-        {
-            props.userData.map(u => <div key={u.id}>
+class Users extends React.Component {
+    getUsers = () => {
+        if (this.props.userData.length === 0) {
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => (
+                    this.props.setUsers(response.data.items)
+                ));
+        }
+    };
+
+    render() {
+        return <div>
+            <button onClick={this.getUsers}>Get Users</button>
+            {
+                this.props.userData.map(u => <div key={u.id}>
                 <span>
                     <div>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
                     </div>
                     <div>
-
                         {u.followed
                             ? <button onClick={() => {
-                                props.unfollow(u.id)
+                                this.props.unfollow(u.id)
                             }}> UnFollow </button>
                             : <button onClick={() => {
-                                props.follows(u.id)
+                                this.props.follows(u.id)
                             }}>Follow</button>}
                     </div>
                 </span>
-                <span>
+                    <span>
                     <span>
                         <div>
                             {u.name}
@@ -46,9 +50,10 @@ let Users = (props) => {
                         </div>
                 </span>
                 </span>
-            </div>)
-        }
-    </div>
+                </div>)
+            }
+        </div>
+    }
+}
 
-};
-export default Users;
+export default Users
