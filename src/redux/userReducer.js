@@ -6,10 +6,10 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 
 let initialState = {
-    userData: [ ],
-    pageSize: 100,
+    userData: [],
+    pageSize: 5,
     totalUsersCounts: 0,
-    currentPage: 10
+    currentPage: 1
 };
 
 const userReducer = (state = initialState, action) => {
@@ -35,13 +35,13 @@ const userReducer = (state = initialState, action) => {
                 })
             };
         case SET_USERS: {
-            return {...state, userData: action.userData }
+            return {...state, userData: action.userData}
         }
 
-        case SET_CURRENT_PAGE:{
+        case SET_CURRENT_PAGE: {
             return {...state, currentPage: action.currentPage}
         }
-        case SET_TOTAL_USERS_COUNT:{
+        case SET_TOTAL_USERS_COUNT: {
             return {...state, totalUsersCounts: action.count}
         }
         default:
