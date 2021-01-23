@@ -29,13 +29,8 @@ let Users = (props) => {
                              className={styles.userPhoto}/>
                     </div>
                     <div>
-                        {u.followed
-                            ? <button onClick={() => {
-                                props.unfollow(u.id)
-                            }}> UnFollow </button>
-                            : <button onClick={() => {
-                                props.follows(u.id)
-                            }}>Follow</button>}
+                        {u.followed ? <button onClick={() => {props.unfollow(u.id)}}> UnFollow </button>
+                            : <button onClick={() => {props.follows(u.id)}}>Follow</button>}
                     </div>
                 </span>
                 <span>
