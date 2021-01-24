@@ -6,8 +6,8 @@ import store from "../../redux/reduxStore";
 
 const Profile = (props) => {
     return <div>
-        <ProfileInfo/>
-        <MyPostsContainer store={store}/>
+        <ProfileInfo profile={props.profile} />
+        <MyPostsContainer />
     </div>
 };
 

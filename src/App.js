@@ -2,10 +2,11 @@ import React from 'react';
 import './App.css';
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import {Route} from "react-router-dom";
 import DialogContainer from "./components/Dialog/DialogContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
+import store from "./redux/reduxStore";
 
 const App = (props) => {
 
@@ -15,7 +16,7 @@ const App = (props) => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path='/profile'
-                       render={() => <Profile/>}/>
+                       render={() => <ProfileContainer/>}/>
                 <Route path='/dialog'
                        render={() => <DialogContainer/>}/>
                 <Route path='/users'
