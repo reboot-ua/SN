@@ -6,7 +6,6 @@ import {Route} from "react-router-dom";
 import DialogContainer from "./components/Dialog/DialogContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import store from "./redux/reduxStore";
 
 const App = (props) => {
 
@@ -15,7 +14,7 @@ const App = (props) => {
             <Header/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/profile'
+                <Route path='/profile/:usersId?'
                        render={() => <ProfileContainer/>}/>
                 <Route path='/dialog'
                        render={() => <DialogContainer/>}/>
