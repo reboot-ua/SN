@@ -1,7 +1,6 @@
 import {profileAPI, userAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST = 'UPDATE-NEW-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -10,32 +9,22 @@ let initialState = {
         {id: 1, message: 't\'s my first post', likeCount: '21'},
         {id: 2, message: 'Hi, how are you?', likeCount: '1'}
     ],
-    newPost: '',
     profile: null,
     status: ''
 };
 
 const profileReducer = (state = initialState, action) => {
-    let stateCopy = {
-        ...state,
-        postData: [...state.postData]
-    };
     switch (action.type) {
         case ADD_POST:
             let newPost = {
                 id: '5',
-                message: state.newPost,
+                message: action.newPost,
                 likeCount: 0
             };
             return {
                 ...state,
                 postData: [...state.postData, newPost],
                 newPost: ''
-            };
-        case UPDATE_NEW_POST:
-            return {
-                ...state,
-                newPost: action.text
             };
         case SET_USER_PROFILE:
             return {
@@ -51,10 +40,8 @@ const profileReducer = (state = initialState, action) => {
             return state
     }
 };
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const updateNewPostCreator = (text) => ({type: UPDATE_NEW_POST, text: text});
+export const addPostActionCreator = (newPost) => ({type: ADD_POST, newPost});
 export const setStatus = (status) => ({type: SET_STATUS, status});
-
 
 export const getUserProfile = (userId) => (dispatch) => {
     userAPI.getProfile(userId).then(response => {
@@ -68,7 +55,7 @@ export const getStatus = (userId) => (dispatch) => {
 };
 export const updateStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status).then(response => {
-        if (response.data.resultCode === 0 ) {
+        if (response.data.resultCode === 0) {
             dispatch(setStatus(status));
         }
     })
