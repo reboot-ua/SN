@@ -11,7 +11,8 @@ let initialState = {
         {id: 2, message: 'Hi, how are you?', likeCount: '1'}
     ],
     newPost: '',
-    profile: null
+    profile: null,
+    status: ''
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -52,7 +53,7 @@ const profileReducer = (state = initialState, action) => {
 };
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const updateNewPostCreator = (text) => ({type: UPDATE_NEW_POST, text: text});
-export const setStatus = (status) => ({type: SET_STATUS, text: status});
+export const setStatus = (status) => ({type: SET_STATUS, status});
 
 
 export const getUserProfile = (userId) => (dispatch) => {
@@ -68,7 +69,7 @@ export const getStatus = (userId) => (dispatch) => {
 export const updateStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status).then(response => {
         if (response.data.resultCode === 0 ) {
-            dispatch(setStatus(response.data));
+            dispatch(setStatus(status));
         }
     })
 };
